@@ -5,8 +5,8 @@ function Bread(spriteTexture) {
 
 	this.mBread = new SpriteRenderable(spriteTexture);
     this.mBread.setColor([1, 1, 1, 0]);
-    this.mBread.getXform().setPosition(25, 65);
-    this.mBread.getXform().setSize(3, 3);
+    this.mBread.getXform().setPosition(50, 40);
+    this.mBread.getXform().setSize(6, 6);
     this.mBread.setElementPixelPositions(1536, 1792, 0, 256);
 	GameObject.call(this, this.mBread);
 }

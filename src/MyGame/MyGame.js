@@ -39,7 +39,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5), // position of the camera
         100,                       // width of camera
-        [0, 0, 750, 1334]           // viewport (orgX, orgY, width, height)
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.31, 0.7, 0.29, 1]);
             // sets the background to gray
@@ -47,8 +47,8 @@ MyGame.prototype.initialize = function () {
    
     this.mBackground = new SpriteRenderable(this.kBackgroundImage);
     this.mBackground.setColor([1, 1, 1, 0]);
-    this.mBackground.getXform().setPosition(50, 50);
-    this.mBackground.getXform().setSize(93.6, 69.9);
+    this.mBackground.getXform().setPosition(50, 37);
+    this.mBackground.getXform().setSize(80, 60);
     this.mBackground.setElementPixelPositions(0, 397, 0, 294);
 
     this.mBread = new Bread(this.kDuckSprite);
