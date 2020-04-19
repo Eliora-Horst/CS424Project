@@ -3,7 +3,7 @@
  * Provides input support
  */
 /*jslint node: true, vars: true */
-/*global gEngine: false, window: false */
+/*global document, window*/
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 
@@ -66,6 +66,12 @@ gEngine.Input = (function () {
         LastKeyCode: 222
     };
 
+    var kMouseButton = {
+        Left: 0,
+        Middle: 1,
+        Right: 2
+    };
+
     // Previous key state
     var mKeyPreviousState = [];     // a new array
     // The pressed keys.
@@ -74,25 +80,78 @@ gEngine.Input = (function () {
     var mIsKeyClicked = [];
 
 
-    // Event handler functions
+    // Support mouse
+    var mCanvas = null;
+    var mButtonPreviousState = [];
+    var mIsButtonPressed = [];
+    var mIsButtonClicked = [];
+    var mMousePosX = -1;
+    var mMousePosY = -1;
+
+    // <editor-fold desc="Event handler functions">
+    //<editor-fold desc="Keyboard handlers">
     var _onKeyDown = function (event) {
         mIsKeyPressed[event.keyCode] = true;
     };
     var _onKeyUp = function (event) {
         mIsKeyPressed[event.keyCode] = false;
     };
+    //</editor-fold>
 
-    var initialize = function () {
+    //<editor-fold desc="Mouse handlers">
+    var _onMouseMove = function (event) {
+        var inside = false;
+        var bBox = mCanvas.getBoundingClientRect();
+        // In Canvas Space now. Convert via ratio from canvas to client.
+        var x = Math.round((event.clientX - bBox.left) * (mCanvas.width / bBox.width));
+        var y = Math.round((event.clientY - bBox.top) * (mCanvas.height / bBox.height));
+
+        if ((x >= 0) && (x < mCanvas.width) &&
+            (y >= 0) && (y < mCanvas.height)) {
+            mMousePosX = x;
+            mMousePosY = mCanvas.height - 1 - y;
+            inside = true;
+        }
+        return inside;
+    };
+
+    var _onMouseDown = function (event) {
+        if (_onMouseMove(event)) {
+            mIsButtonPressed[event.button] = true;
+        }
+    };
+
+    var _onMouseUp = function (event) {
+        _onMouseMove(event);
+        mIsButtonPressed[event.button] = false;
+    };
+    //</editor-fold>
+    //</editor-fold>
+
+    var initialize = function (canvasID) {
+        //<editor-fold desc="Keyboard support">
         var i;
         for (i = 0; i < kKeys.LastKeyCode; i++) {
             mIsKeyPressed[i] = false;
             mKeyPreviousState[i] = false;
             mIsKeyClicked[i] = false;
         }
-
         // register handlers 
         window.addEventListener('keyup', _onKeyUp);
         window.addEventListener('keydown', _onKeyDown);
+        //</editor-fold>
+
+        //<editor-fold desc="Mouse support">
+        for (i = 0; i < 3; i++) {
+            mButtonPreviousState[i] = false;
+            mIsButtonPressed[i] = false;
+            mIsButtonClicked[i] = false;
+        }
+        window.addEventListener('mousedown', _onMouseDown);
+        window.addEventListener('mouseup', _onMouseUp);
+        window.addEventListener('mousemove', _onMouseMove);
+        mCanvas = document.getElementById(canvasID);
+        //</editor-fold>
     };
 
     var update = function () {
@@ -100,6 +159,10 @@ gEngine.Input = (function () {
         for (i = 0; i < kKeys.LastKeyCode; i++) {
             mIsKeyClicked[i] = (!mKeyPreviousState[i]) && mIsKeyPressed[i];
             mKeyPreviousState[i] = mIsKeyPressed[i];
+        }
+        for (i = 0; i < 3; i++) {
+            mIsButtonClicked[i] = (!mButtonPreviousState[i]) && mIsButtonPressed[i];
+            mButtonPreviousState[i] = mIsButtonPressed[i];
         }
     };
 
@@ -112,12 +175,31 @@ gEngine.Input = (function () {
         return (mIsKeyClicked[keyCode]);
     };
 
+    var isButtonPressed = function (button) {
+        return mIsButtonPressed[button];
+    };
+
+    var isButtonClicked = function (button) {
+        return mIsButtonClicked[button];
+    };
+    var getMousePosX = function () { return mMousePosX; };
+    var getMousePosY = function () { return mMousePosY; };
+
     var mPublic = {
         initialize: initialize,
         update: update,
+
+        // keyboard support
         isKeyPressed: isKeyPressed,
         isKeyClicked: isKeyClicked,
-        keys: kKeys
+        keys: kKeys,
+
+        // Mouse support
+        isButtonPressed: isButtonPressed,
+        isButtonClicked: isButtonClicked,
+        getMousePosX: getMousePosX,       // invalid if no corresponding buttonPressed or buttonClicked
+        getMousePosY: getMousePosY,
+        mouseButton: kMouseButton
     };
     return mPublic;
 }());
