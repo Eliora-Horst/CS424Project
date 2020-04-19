@@ -88,9 +88,16 @@ MyGame.prototype.draw = function () {
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
+    if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
+        
+            this.mBread.getXform().setXPos(this.mCamera.mouseWCX());
+            this.mBread.getXform().setYPos(this.mCamera.mouseWCY());
+        
+    }
+
     var h = [];
     var touchedDuck = this.mFlock.isTouched(this.mBread,h);
-    if((touchedDuck != null)&&(gEngine.Input.isKeyPressed(gEngine.Input.keys.Space))){
+    if((touchedDuck != null)&&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left))){
         console.log(touchedDuck.getXform().getXPos());
         console.log(touchedDuck.getXform().getYPos());
         this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos());
