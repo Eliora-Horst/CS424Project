@@ -41,7 +41,9 @@ p{
     font-family: 'Sarabun', sans-serif;
 }
 .game{
-    align-self: center;
+    grid-column:5; 
+    grid-row: 1;
+    padding-top: 20px;
 }
 #nav{
     background-color:#fffb82;
