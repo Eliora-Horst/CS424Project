@@ -2,10 +2,10 @@
 
 class Flock {
     constructor(spriteTexture, flockSize) {
-        this.xRange = 50;
-        this.xStart = 25;
-        this.yRange = 40;
-        this.yStart = 20;
+        this.xRange = 53;
+        this.xStart = 23;
+        this.yRange = 35;
+        this.yStart = 21;
         //GameObject.call(this, this.mFlock);
         this.mFlock = new Array();
         var x, y;
