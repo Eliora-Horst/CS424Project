@@ -9,6 +9,7 @@ function MyGame() {
     this.mCamera = null;
 
     this.mMsg = null;
+    this.mTime = null;
 
     this.score = 0;
     this.mBread = null;
@@ -17,6 +18,9 @@ function MyGame() {
     this.mDuckHit = null;
     this.mBackground = null; 
     this.didScore = false;
+    this.timeStarted = true;
+    this.currentSecond = 30;
+    this.time = null;
 
 }
 
@@ -60,6 +64,11 @@ MyGame.prototype.initialize = function () {
     this.mMsg.setColor([0, 0, 0, 1]);
     this.mMsg.getXform().setPosition(1, 2);
     this.mMsg.setTextHeight(3);
+
+    this.mMsg = new FontRenderable("Time: 0");
+    this.mMsg.setColor([0, 0, 0, 1]);
+    this.mMsg.getXform().setPosition(4, 2);
+    this.mMsg.setTextHeight(3);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -73,6 +82,7 @@ MyGame.prototype.draw = function () {
     this.mBackground.draw(this.mCamera);
 
     this.mMsg.draw(this.mCamera);
+    this.mTime.draw(this.mCamera);
     
     this.mFlock.draw(this.mCamera);
     /*var i = 0;
@@ -108,8 +118,25 @@ MyGame.prototype.update = function () {
         this.score++;
         this.mMsg.setText("Score: "+ this.score);
     }
-
+    this.mTime.setText("Time: " + this.currentSecond)
     this.mDuckHit.update();
     this.mBread.update();
     this.mFlock.update();
 };
+
+this.currentSecond = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now and the count down date
+    var distance = this.currentSecond - now;
+
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  console.log(seconds);
+  
+    // If the count down is finished, write some text
+   /* if (distance < 0) {
+      clearInterval(x);
+    }*/
+  }, 1000);
