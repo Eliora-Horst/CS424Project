@@ -97,7 +97,9 @@ MyGame.prototype.update = function () {
 
     var h = [];
     var touchedDuck = this.mFlock.isTouched(this.mBread,h);
-    if((touchedDuck != null)&&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left))){
+    if((touchedDuck != null)
+        &&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)
+        ||gEngine.Input.isKeyPressed(gEngine.Input.keys.Space))){
         console.log(touchedDuck.getXform().getXPos());
         console.log(touchedDuck.getXform().getYPos());
         this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos());
