@@ -48,8 +48,8 @@ MyGame.prototype.initialize = function () {
     this.mBackground = new SpriteRenderable(this.kBackgroundImage);
     this.mBackground.setColor([1, 1, 1, 0]);
     this.mBackground.getXform().setPosition(50, 37);
-    this.mBackground.getXform().setSize(80, 60);
-    this.mBackground.setElementPixelPositions(0, 397, 0, 294);
+    this.mBackground.getXform().setSize(85, 65);
+    this.mBackground.setElementPixelPositions(0, 1024, 0, 574);
 
     this.mBread = new Bread(this.kDuckSprite);
     this.mDuckHit = new SinkingDuck(this.kSinkingDucks, 35, 45);
@@ -89,10 +89,8 @@ MyGame.prototype.draw = function () {
 // anything from this function!
 MyGame.prototype.update = function () {
     if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
-        
             this.mBread.getXform().setXPos(this.mCamera.mouseWCX());
-            this.mBread.getXform().setYPos(this.mCamera.mouseWCY());
-        
+            this.mBread.getXform().setYPos(this.mCamera.mouseWCY());  
     }
 
     var h = [];
