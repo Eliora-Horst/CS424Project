@@ -64,6 +64,11 @@ p{
     padding-left: 2px;
     padding-right: 2px;
   }
+.dev_content > a >img{
+    width: 40%;
+    margin-left: 30%;
+    padding: 10px;
+}
 .about_content {
     grid-column-start: 3;
     grid-column-end: 8; 
@@ -96,6 +101,24 @@ p{
     grid-column-start: 3;
     grid-column-end: 8; 
     grid-row-start: 1;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.how_content2 {
+    grid-column-start: 3;
+    grid-column-end: 8; 
+    grid-row-start: 3;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.how_content3 {
+    grid-column-start: 3;
+    grid-column-end: 8; 
+    grid-row-start: 4;
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
@@ -184,4 +207,7 @@ p{
 #span-fix{
     width: 100%;
     text-align: center;
+}
+#real_ducks{
+    width: 40%;
 }
