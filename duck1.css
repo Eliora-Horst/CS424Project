@@ -1,6 +1,7 @@
 body{
     font-family: 'Quicksand', sans-serif;
     background-color:white;
+    margin: 0;
 }
 h1{
     font-family: 'Quicksand', sans-serif;
@@ -175,4 +176,8 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#span-fix{
+    width: 100%;
+    text-align: center;
 }
