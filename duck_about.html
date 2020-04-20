@@ -9,22 +9,29 @@
     <body>
         <section id="nav" class="wrapper">
             
-            <div class="box far_left"><a href="duck_about.html">About</a></div>
-            <div class="box left"><a href="duck_howto.html">How To</a></div>
-            <div class= "box center"><a href="index.html"><img src="ducklogo2.png" width="100%" height = "100%"></a></div>
-            <div class="box right"><a href="duck_dev.html">Development</a></div>
-            <div class="box far_right"><a href="duck_contact.html">Contact</a></div>
+            <div class="box far_left" onclick='location.href = "duck_about.html";'>About</div>
+            <div class="box left" onclick = 'location.href = "duck_howto.html";'>How To</div>
+            <div class="box center" onclick = 'location.href = "index.html";'><img src="ducklogo2.png" width="100%" height = "100%"></div>
+            <div class="box right" onclick = 'location.href = "duck_dev.html";'>Development</div>
+            <div class="box far_right" onclick = 'location.href = "duck_contact.html";'>Contact</div>
             
         </section>
-        <div class="content center">
-            <h1>About the Game</h1>
-        </div>
-        <div class="content center">
-            <p>The Lucky Duck game was created as a long term project for the CS424 Client Side Web Design course at Loyola University Chicago spring 2020.</p>
-        </div>
-        <div class="content center">
-            <h1>About the Creators</h1>
-        </div>
+        <section class="wrapper_content">
+            <div class="about_content">
+                <h1>About the Game</h1>
+                <p>This project is the final version of a semester long project for COMP 424 Client-Side Web Design at Loyola University Chicago. For this project we had to make a client-side website using HTML, CSS, and JavaScript.</p>
+                <p>Lucky Duck is based upon a joke about ducks between the two developers. The idea then morphed into a virtual version of the 'Lucky Duck' carnival game where players cast magnetic fishing rods into a pond of moving rubberducks. If a player is able to catch a duck they will get the prize promised on the bottom of the rubber duck. The original virtual version would have allowed users to cast their rod to catch a moving duck to earn points towards a high-score goal.</p>
+                <p>Throughout the design process gameplay had many different versions such as carnival-style mini-games, catching ducks against a count down clock, earning coins to gain power-ups or better fishing rods. Ultimately the designers decided to simplify the game in favor of creating their own game engine. The game engine is based-off of <i>Build Your Own 2D Game Engine and Create Great Web Games: Using HTML5, JavaScript, and WebGL</i> by Kelvin Sung, Jebediah Pavleas, Jason Pace, and Fernando Arnez. The current version of the game has the user feeding bread to randomly placed ducks.</p>
+            </div>
+            <div class="bio_content">
+                <h1 id="span-fix">About the Developers</h1>
+                <h2>Anna Kroon</h2>
+                <p>Anna is a first year MA student in Digital Humanities at Loyola University Chicago. She has a background in English-writing, Computer Science, and History. Her research interests are adaptation, Folk and Fairytales, and 18th century literature. She would be glad to never see a virtual duck ever again.</p>
+                <h2>Eliora Horst</h2>
+                <p>Eliora is a first year MA student in Digital Humanities at Loyola University Chicago. She has a background in English-literature, Computer Science, and Medieval Studies. Her research interests are Medieval literature, digital editions, and game design.</p>
+                <p>&nbsp;</p>
+            </div>
+        </section>
         <footer> 
             <div class="box bottom_center">Version 1.0</div>
             <div class="box bottom_center">Copyright 2020</div>
