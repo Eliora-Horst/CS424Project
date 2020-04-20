@@ -39,11 +39,19 @@ a:hover{
 .box > a:link {
     text-decoration: none;
     color: black;
+<<<<<<< HEAD
 }
 .box > .boxa:visited{
     text-decoration: none;
     color: black;
 }
+=======
+}
+.box > .boxa:visited{
+    text-decoration: none;
+    color: black;
+}
+>>>>>>> fe18284d9586553dc4d5c9d6e1003eb037ab5363
 .box > a:hover{
     text-decoration: none;
     color:#1c9e05;
@@ -228,4 +236,8 @@ p{
 }
 #real_ducks{
     width: 40%;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fe18284d9586553dc4d5c9d6e1003eb037ab5363
