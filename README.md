@@ -1,8 +1,8 @@
 # LUCKY DUCKS GAME
-## Final Project
-### CS 424: Client Side Web Development
-### Dr. Nicholas Hayward
-### Loyola University Chicago - Spring 2020
+#### Final Project
+#### CS 424: Client Side Web Development
+#### Dr. Nicholas Hayward
+#### Loyola University Chicago - Spring 2020
 
 ## Project
 This is the final project for our web design class.  It is a JavaScript based web game, where the user must throw pieces of bread at ducks bobbing in a pond.  As soon as they feed all the ducks, or the timer runs out, the game ends.  Apart from this primary function, the site also has static pages with more information and contact details.  We decided to create a game for our final because it was a project both of us had limited experience with.  Eliora H had never created a graphics heavy web based game before, and Anna K had only done one in Java.  We also wanted to create something that would challenge our skill level, as both of us were confident in our abilities with static web pages before beginning this project. Our goal with this game to find a nice balance between cute, modern, and functional design.  We wanted a clean interface, with easy to follow navigation and familiar grid layout.  We chose the colors based on the idea of ducks in a pond.  The icon at the top is based off of the ducks in the game itself.  As far as the design of the game itself, we wanted a retro feel, so Eliora H designed the sprite sheets with an 8-bit aesthetic in mind.
