@@ -6,7 +6,7 @@ class Flock {
         this.xStart = 23;
         this.yRange = 35;
         this.yStart = 21;
-        //GameObject.call(this, this.mFlock);
+
         this.mFlock = new Array();
         var x, y;
         var i, p;

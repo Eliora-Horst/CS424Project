@@ -11,6 +11,7 @@ function GameStart() {
 
     this.mStartGame = null;
 }
+
 gEngine.Core.inheritPrototype(GameStart, Scene);
 
 GameStart.prototype.unloadScene = function () {
@@ -25,6 +26,7 @@ GameStart.prototype.initialize = function () {
         100,                      
         [0, 0, 640, 480]          
     );
+
     this.mCamera.setBackgroundColor([0.31, 0.7, 0.29, 1]);
 
     this.mTitle = new FontRenderable("Welcome to Lucky Ducks");
@@ -64,13 +66,8 @@ GameStart.prototype.initialize = function () {
 
 }
 
-// This is the draw function, make sure to setup proper drawing environment, and more
-// importantly, make sure to _NOT_ change any state.
 GameStart.prototype.draw = function () {
-    // Step A: clear the canvas
-    gEngine.Core.clearCanvas([0.31, 0.7, 0.29, 1]); // clear to light gray
-
-    // Step  B: Activate the drawing Camera
+    gEngine.Core.clearCanvas([0.31, 0.7, 0.29, 1]);
     this.mCamera.setupViewProjection();
     this.mTitle.draw(this.mCamera);
     this.mLine1.draw(this.mCamera);
@@ -80,12 +77,11 @@ GameStart.prototype.draw = function () {
     this.mLine5.draw(this.mCamera);
 
     this.mStartGame.draw(this.mCamera);
-};
+}
 
-// The update function, updates the application state. Make sure to _NOT_ draw
-// anything from this function!
 GameStart.prototype.update = function () {
+    //Press SPACE to go to main game
     if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Space)){
         gEngine.GameLoop.stop();
     }
-};
+}

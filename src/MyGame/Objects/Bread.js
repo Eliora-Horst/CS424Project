@@ -20,6 +20,7 @@ function Bread(spriteTexture) {
 gEngine.Core.inheritPrototype(Bread, GameObject);
 
 Bread.prototype.update = function () {
+    //Lets user manipulate this object with the arrow keys
 	var xform = this.mBread.getXform();
 
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Up)) {
@@ -34,5 +35,6 @@ Bread.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
         xform.incXPosBy(this.kDelta);
     }
+    //Bread spins
     this.mBread.updateAnimation();
 };

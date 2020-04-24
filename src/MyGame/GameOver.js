@@ -7,11 +7,10 @@ function GameOver() {
 gEngine.Core.inheritPrototype(GameOver, Scene);
 
 GameOver.prototype.unloadScene = function () {
-    gEngine.Core.cleanUp(); // releases all gl resources
+    gEngine.Core.cleanUp();
 }
 
 GameOver.prototype.initialize = function () {
-    // Step A: set up the cameras
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5),
         100,                    
