@@ -11,7 +11,7 @@ This is the final project for our web design class.  It is a JavaScript based we
 Click [here](https://eliora-horst.github.io/CS424Project/index.html) to play the game.
 
 ## Development
-We used the game engine core established in the book *Build Your Own 2D Game Engine and Create Great Web Games: Using HTML5, JavaScript, and WebGL*, and built our own objects, core game, and sprite sheets.
+We used the game engine core established in the book *Build Your Own 2D Game Engine and Create Great Web Games: Using HTML5, JavaScript, and WebGL*, and build our own objects, core game, and sprite sheets.
 
 ## Contributions
 ### [Anna Kroon](https://github.com/noorka)
