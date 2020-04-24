@@ -4,6 +4,7 @@ function MyGame() {
     this.kDuckSprite = "assets/Ducks_Bobbing.png";
     this.kSinkingDucks = "assets/Sinking_Ducks.png";
     this.kBackgroundImage = "assets/pond.png";
+    this.kBreadSpin = "assets/Bread_Spin.png";
 
     // The camera to view the scene
     this.mCamera = null;
@@ -19,11 +20,10 @@ function MyGame() {
     this.mDuckHit = null;
     this.mBackground = null; 
     this.didScore = false;
+
     this.mcountDownDate = null;
     this.mInterval = null;
-    //this.mGameComplete = null;
     this.time = null;
-
 }
 
 gEngine.Core.inheritPrototype(MyGame, Scene);
@@ -32,12 +32,14 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kDuckSprite);
     gEngine.Textures.loadTexture(this.kSinkingDucks);
     gEngine.Textures.loadTexture(this.kBackgroundImage);
+    gEngine.Textures.loadTexture(this.kBreadSpin);
 };
 
 MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kDuckSprite);
     gEngine.Textures.unloadTexture(this.kSinkingDucks);
     gEngine.Textures.unloadTexture(this.kBackgroundImage);
+    gEngine.Textures.unloadTexture(this.kBreadSpin);
 
     var nextLevel = new GameOver();
     gEngine.Core.startScene(nextLevel);
@@ -60,7 +62,8 @@ MyGame.prototype.initialize = function () {
     this.mBackground.getXform().setSize(85, 65);
     this.mBackground.setElementPixelPositions(0, 1024, 0, 574);
 
-    this.mBread = new Bread(this.kDuckSprite);
+    this.mBread = new Bread(this.kBreadSpin);
+    
     this.mDuckHit = new SinkingDuck(this.kSinkingDucks, 35, 45);
     this.mDuckHit.setVisibility(false);
     this.mFlock = new Flock(this.kDuckSprite, 15);
@@ -139,8 +142,9 @@ MyGame.prototype.update = function () {
         this.mDuckHit.update();
         this.mBread.update();
         this.mFlock.update();
+    }
 }
-};
+
 MyGame.prototype.timer = function() {
 
     var now = new Date().getTime();

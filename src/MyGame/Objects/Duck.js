@@ -2,6 +2,7 @@
 
 function Duck(spriteTexture, xCoord, yCoord) {
     this.fedFlag = false;
+    
     this.mDuck = new SpriteAnimateRenderable(spriteTexture);
     this.mDuck.setColor([1, 1, 1, 0]);
     this.mDuck.getXform().setPosition(xCoord, yCoord);
