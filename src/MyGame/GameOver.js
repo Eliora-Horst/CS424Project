@@ -23,19 +23,19 @@ GameOver.prototype.unloadScene = function () {
 GameOver.prototype.initialize = function () {
     // Step A: set up the cameras
     this.mCamera = new Camera(
-        vec2.fromValues(50, 33),   // position of the camera
+        vec2.fromValues(50, 37.5),   // position of the camera
         100,                       // width of camera
-        [0, 0, 600, 400]           // viewport (orgX, orgY, width, height)
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
     );
-    this.mCamera.setBackgroundColor([0.9, 0.9, 0.9, 1]);
+    this.mCamera.setBackgroundColor([0.15, 0.36, 0.6, 1]);
             // sets the background to gray
 
     //<editor-fold desc="Create the fonts!">
     // this.mText = new FontRenderable("This is green text");
     this.mMsg = new FontRenderable("Game Over!");
-    this.mMsg.setColor([0, 0, 0, 1]);
-    this.mMsg.getXform().setPosition(22, 32);
-    this.mMsg.setTextHeight(10);
+    this.mMsg.setColor([1, 1, 1, 1]);
+    this.mMsg.getXform().setPosition(20, 45);
+    this.mMsg.setTextHeight(12);
     //</editor-fold>
 };
 
@@ -47,7 +47,7 @@ GameOver.prototype.draw = function () {
 
     // Step  B: Activate the drawing Camera
     this.mCamera.setupViewProjection();
-    this.mMsg.draw(this.mCamera.getVPMatrix());
+    this.mMsg.draw(this.mCamera);
 };
 
 // The update function, updates the application state. Make sure to _NOT_ draw

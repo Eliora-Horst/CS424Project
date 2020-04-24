@@ -12,14 +12,16 @@ function MyGame() {
     this.mTime = null;
 
     this.score = 0;
+    this.timeUp = false;
     this.mBread = null;
     this.mDuck = null;
     this.mFlock = null;
     this.mDuckHit = null;
     this.mBackground = null; 
     this.didScore = false;
-    this.timeStarted = true;
-    this.currentSecond = 30;
+    this.mcountDownDate = null;
+    this.mInterval = null;
+    //this.mGameComplete = null;
     this.time = null;
 
 }
@@ -36,6 +38,9 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kDuckSprite);
     gEngine.Textures.unloadTexture(this.kSinkingDucks);
     gEngine.Textures.unloadTexture(this.kBackgroundImage);
+
+    var nextLevel = new GameOver();
+    gEngine.Core.startScene(nextLevel);
 };
 
 MyGame.prototype.initialize = function () {
@@ -65,10 +70,15 @@ MyGame.prototype.initialize = function () {
     this.mMsg.getXform().setPosition(1, 2);
     this.mMsg.setTextHeight(3);
 
-    this.mMsg = new FontRenderable("Time: 0");
-    this.mMsg.setColor([0, 0, 0, 1]);
-    this.mMsg.getXform().setPosition(4, 2);
-    this.mMsg.setTextHeight(3);
+    this.mTime = new FontRenderable("Time: 0");
+    this.mTime.setColor([0, 0, 0, 1]);
+    this.mTime.getXform().setPosition(20, 2);
+    this.mTime.setTextHeight(3);
+
+    this.mcountDownDate = new Date().getTime();
+
+    //this.mGameComplete = new GameOver();
+    //this.mGameComplete.initialize();
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -93,50 +103,56 @@ MyGame.prototype.draw = function () {
 
     this.mDuckHit.draw(this.mCamera);
     this.mBread.draw(this.mCamera);
+
+    this.mInterval = setInterval(this.timer(), 1000);
+
+    //this.mGameComplete.draw();
 };
 
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
-            this.mBread.getXform().setXPos(this.mCamera.mouseWCX());
-            this.mBread.getXform().setYPos(this.mCamera.mouseWCY());  
+    if((this.timeUp == true)||(this.score == 15)){
+        gEngine.GameLoop.stop();
     }
+    else{
+        if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
+                this.mBread.getXform().setXPos(this.mCamera.mouseWCX());
+                this.mBread.getXform().setYPos(this.mCamera.mouseWCY());  
+        }
 
-    var h = [];
-    var touchedDuck = this.mFlock.isTouched(this.mBread,h);
-    if((touchedDuck != null)
-        &&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)
-        ||gEngine.Input.isKeyPressed(gEngine.Input.keys.Space))){
-        console.log(touchedDuck.getXform().getXPos());
-        console.log(touchedDuck.getXform().getYPos());
-        this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos());
-        touchedDuck.setVisibility(false);
-        this.mDuckHit.setVisibility(true);
-        this.mDuckHit.updateBeginning();
-        touchedDuck.feedDuck();
-        this.score++;
-        this.mMsg.setText("Score: "+ this.score);
-    }
-    this.mTime.setText("Time: " + this.currentSecond)
-    this.mDuckHit.update();
-    this.mBread.update();
-    this.mFlock.update();
+        var h = [];
+        var touchedDuck = this.mFlock.isTouched(this.mBread,h);
+        if((touchedDuck != null)
+            &&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)
+            ||gEngine.Input.isKeyPressed(gEngine.Input.keys.Space))){
+            console.log(touchedDuck.getXform().getXPos());
+            console.log(touchedDuck.getXform().getYPos());
+            this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos());
+            touchedDuck.setVisibility(false);
+            this.mDuckHit.setVisibility(true);
+            this.mDuckHit.updateBeginning();
+            touchedDuck.feedDuck();
+            this.score++;
+            this.mMsg.setText("Score: "+ this.score);
+        }
+        this.mDuckHit.update();
+        this.mBread.update();
+        this.mFlock.update();
+}
 };
+MyGame.prototype.timer = function() {
 
-this.currentSecond = setInterval(function() {
-
-    // Get today's date and time
     var now = new Date().getTime();
-  
-    // Find the distance between now and the count down date
-    var distance = this.currentSecond - now;
 
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  console.log(seconds);
-  
-    // If the count down is finished, write some text
-   /* if (distance < 0) {
-      clearInterval(x);
-    }*/
-  }, 1000);
+    var distance = (now - this.mcountDownDate);
+
+    var seconds = 30 - (Math.floor((distance % (1000 * 60)) / 1000));
+
+    this.mTime.setText("Time: " + seconds);
+    if(seconds <=0){
+        this.timeUp = true;
+        this.mTime.setText("GAME OVER");
+    }
+
+  }
