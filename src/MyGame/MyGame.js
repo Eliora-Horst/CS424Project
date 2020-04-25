@@ -69,14 +69,15 @@ MyGame.prototype.initialize = function () {
     //Makes raft of ducks in random positions
     this.mFlock = new Flock(this.kDuckSprite, 15);
 
+    //Sets up the text for the score and time
     this.mMsg = new FontRenderable("Score: 0");
     this.mMsg.setColor([0, 0, 0, 1]);
-    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.getXform().setPosition(3, 73);
     this.mMsg.setTextHeight(3);
 
     this.mTime = new FontRenderable("Time: 0");
     this.mTime.setColor([0, 0, 0, 1]);
-    this.mTime.getXform().setPosition(20, 2);
+    this.mTime.getXform().setPosition(84, 73);
     this.mTime.setTextHeight(3);
 
     this.mcountDownDate = new Date().getTime();
@@ -121,7 +122,8 @@ MyGame.prototype.update = function () {
         if((touchedDuck != null)
             &&(gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)
             ||gEngine.Input.isKeyPressed(gEngine.Input.keys.Space))){
-            this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos());
+            this.mDuckHit.getXform().setPosition(touchedDuck.getXform().getXPos(), touchedDuck.getXform().getYPos()); //There is only one sinking duck on the page that moves to the position of the touched duck before it is made visable. 
+            //This can cause animation glitches if the user drags the bread around or clicks on a new duck before the previous sinking animation is completed
             touchedDuck.setVisibility(false);         //Makes regular bobbing duck dissapear
             this.mDuckHit.setVisibility(true);        //Makes sinking duck appear
             this.mDuckHit.updateBeginning();          //Restarts sinking duck animation to appear properly
@@ -134,9 +136,9 @@ MyGame.prototype.update = function () {
         this.mFlock.update();
     }
 }
-
+//This is the time function that creates the countdown clock and is modified from the w3schools countdown clock code https://www.w3schools.com/howto/howto_js_countdown.asp
 MyGame.prototype.timer = function() {
-
+    //this compares the time when the game started to the time now then converts that from counting up to counting down only 30 seconds
     var now = new Date().getTime();
 
     var distance = (now - this.mcountDownDate);
@@ -144,9 +146,9 @@ MyGame.prototype.timer = function() {
     var seconds = 30 - (Math.floor((distance % (1000 * 60)) / 1000));
 
     this.mTime.setText("Time: " + seconds);
+    //When the time is over this sets the flag boolean to let the main game loop know to execute game over
     if(seconds <=0){
         this.timeUp = true;
-        this.mTime.setText("GAME OVER");
     }
 
   }
